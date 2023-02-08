@@ -3,20 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
+    <!--父工程坐标-->
+    <groupId>com.itheima.sh.test</groupId>
     <artifactId>stock_parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!--当前聚合的子工程-->
     <modules>
-        <module>stock_backend</module>
         <module>stock_common</module>
+        <module>stock_backend</module>
+        <module>stock_job</module>
     </modules>
-
+    <!--打包方式：pom 聚合工程，表示当前是一个父工程-->
     <packaging>pom</packaging>
+    <!--工程描述，可以不写-->
     <description>
-        聚合工程
+        定义项目父工程，作用：
+        1.集合若干子工程，统一管理项目的生命周期
+        2.统一管理项目的依赖
+        3.统一管理插件版本的依赖
     </description>
 
+    <!--版本维护-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -25,6 +32,7 @@
         <maven.surefire.version>2.12.4</maven.surefire.version>
         <mybatis-spring-boot-starter.version>2.1.4</mybatis-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>1.2.12</pagehelper-spring-boot-starter.version>
+        <!--看下你的mysql服务器版本，如果mysql服务器是8.x版本的这里驱动需要是8.x驱动-->
         <mysql-driver.version>5.1.49</mysql-driver.version>
         <fastjson.version>1.2.71</fastjson.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
@@ -39,6 +47,7 @@
         <google.guava.version>30.0-jre</google.guava.version>
     </properties>
 
+    <!--1.版本锁定 作用：只定义依赖的版本，不负责导入-->
     <dependencyManagement>
         <dependencies>
             <!--引入springboot依赖-->
@@ -55,7 +64,7 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot-starter.version}</version>
             </dependency>
-            <!--pageHelper场景依赖-->
+            <!--pageHelper场景依赖 分页-->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -122,8 +131,8 @@
                 <version>${google.guava.version}</version>
             </dependency>
         </dependencies>
-    </dependencyManagement>
 
+    </dependencyManagement>
 
 
     <build>
@@ -156,7 +165,7 @@
             </plugins>
         </pluginManagement>
 
-
     </build>
+
 
 </project>

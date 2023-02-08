@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="stock_backend" />
         <module name="stock_common" />
+        <module name="stock_job" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

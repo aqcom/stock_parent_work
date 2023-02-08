@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.sh.stock.mapper.StockRtInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.itheima.sh.stock.pojo.entity.StockRtInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="stockCode" column="stock_code" jdbcType="CHAR"/>
+            <result property="stockName" column="stock_name" jdbcType="VARCHAR"/>
+            <result property="preClosePrice" column="pre_close_price" jdbcType="DECIMAL"/>
+            <result property="openPrice" column="open_price" jdbcType="DECIMAL"/>
+            <result property="curPrice" column="cur_price" jdbcType="DECIMAL"/>
+            <result property="minPrice" column="min_price" jdbcType="DECIMAL"/>
+            <result property="maxPrice" column="max_price" jdbcType="DECIMAL"/>
+            <result property="tradeAmount" column="trade_amount" jdbcType="BIGINT"/>
+            <result property="tradeVolume" column="trade_volume" jdbcType="DECIMAL"/>
+            <result property="curTime" column="cur_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,stock_code,stock_name,
+        pre_close_price,open_price,cur_price,
+        min_price,max_price,trade_amount,
+        trade_volume,cur_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from stock_rt_info
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from stock_rt_info
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itheima.sh.stock.pojo.entity.StockRtInfo" useGeneratedKeys="true">
+        insert into stock_rt_info
+        ( id,stock_code,stock_name
+        ,pre_close_price,open_price,cur_price
+        ,min_price,max_price,trade_amount
+        ,trade_volume,cur_time)
+        values (#{id,jdbcType=BIGINT},#{stockCode,jdbcType=CHAR},#{stockName,jdbcType=VARCHAR}
+        ,#{preClosePrice,jdbcType=DECIMAL},#{openPrice,jdbcType=DECIMAL},#{curPrice,jdbcType=DECIMAL}
+        ,#{minPrice,jdbcType=DECIMAL},#{maxPrice,jdbcType=DECIMAL},#{tradeAmount,jdbcType=BIGINT}
+        ,#{tradeVolume,jdbcType=DECIMAL},#{curTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itheima.sh.stock.pojo.entity.StockRtInfo" useGeneratedKeys="true">
+        insert into stock_rt_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="stockCode != null">stock_code,</if>
+                <if test="stockName != null">stock_name,</if>
+                <if test="preClosePrice != null">pre_close_price,</if>
+                <if test="openPrice != null">open_price,</if>
+                <if test="curPrice != null">cur_price,</if>
+                <if test="minPrice != null">min_price,</if>
+                <if test="maxPrice != null">max_price,</if>
+                <if test="tradeAmount != null">trade_amount,</if>
+                <if test="tradeVolume != null">trade_volume,</if>
+                <if test="curTime != null">cur_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="stockCode != null">#{stockCode,jdbcType=CHAR},</if>
+                <if test="stockName != null">#{stockName,jdbcType=VARCHAR},</if>
+                <if test="preClosePrice != null">#{preClosePrice,jdbcType=DECIMAL},</if>
+                <if test="openPrice != null">#{openPrice,jdbcType=DECIMAL},</if>
+                <if test="curPrice != null">#{curPrice,jdbcType=DECIMAL},</if>
+                <if test="minPrice != null">#{minPrice,jdbcType=DECIMAL},</if>
+                <if test="maxPrice != null">#{maxPrice,jdbcType=DECIMAL},</if>
+                <if test="tradeAmount != null">#{tradeAmount,jdbcType=BIGINT},</if>
+                <if test="tradeVolume != null">#{tradeVolume,jdbcType=DECIMAL},</if>
+                <if test="curTime != null">#{curTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.itheima.sh.stock.pojo.entity.StockRtInfo">
+        update stock_rt_info
+        <set>
+                <if test="stockCode != null">
+                    stock_code = #{stockCode,jdbcType=CHAR},
+                </if>
+                <if test="stockName != null">
+                    stock_name = #{stockName,jdbcType=VARCHAR},
+                </if>
+                <if test="preClosePrice != null">
+                    pre_close_price = #{preClosePrice,jdbcType=DECIMAL},
+                </if>
+                <if test="openPrice != null">
+                    open_price = #{openPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="curPrice != null">
+                    cur_price = #{curPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="minPrice != null">
+                    min_price = #{minPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="maxPrice != null">
+                    max_price = #{maxPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="tradeAmount != null">
+                    trade_amount = #{tradeAmount,jdbcType=BIGINT},
+                </if>
+                <if test="tradeVolume != null">
+                    trade_volume = #{tradeVolume,jdbcType=DECIMAL},
+                </if>
+                <if test="curTime != null">
+                    cur_time = #{curTime,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.itheima.sh.stock.pojo.entity.StockRtInfo">
+        update stock_rt_info
+        set 
+            stock_code =  #{stockCode,jdbcType=CHAR},
+            stock_name =  #{stockName,jdbcType=VARCHAR},
+            pre_close_price =  #{preClosePrice,jdbcType=DECIMAL},
+            open_price =  #{openPrice,jdbcType=DECIMAL},
+            cur_price =  #{curPrice,jdbcType=DECIMAL},
+            min_price =  #{minPrice,jdbcType=DECIMAL},
+            max_price =  #{maxPrice,jdbcType=DECIMAL},
+            trade_amount =  #{tradeAmount,jdbcType=BIGINT},
+            trade_volume =  #{tradeVolume,jdbcType=DECIMAL},
+            cur_time =  #{curTime,jdbcType=TIMESTAMP}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+
+    <!--
+        定义方法查询国内个股数据并按照涨幅降序排序
+       List<StockUpdownDomain> getStockPageInfo(@Param("curDate") Date curDate);
+    -->
+    <select id="getStockPageInfo" resultType="com.itheima.sh.stock.pojo.domain.StockUpdownDomain">
+        select
+            stock_code as code,
+            stock_name as name,
+            pre_close_price as preClosePrice,
+            cur_price as tradePrice,
+            trade_amount as tradeAmt,
+            trade_volume as tradeVol,
+            cur_time as curDate,
+            (cur_price - pre_close_price) as increase,
+            (cur_price - pre_close_price)/pre_close_price as upDown,
+            (max_price - min_price)/pre_close_price as amplitude
+        from stock_rt_info
+        where cur_time = #{curDate}
+        order by upDown desc
+    </select>
+    <!--
+          查询涨跌停   openDate 开盘时间  curDate 当前时间  flag 表示标记 1：涨停数据 0：跌停
+            List<Map<String, Object>> getStockUpdownCount(@Param("openDate") Date openDate,
+                                                          @Param("curDate") Date curDate,
+                                                          @Param("flag") int flag);
+
+           分析：如果业务层传递的标记即flag的值是1表示涨停条件是ud >= 0.1
+                如果业务层传递的标记即flag的值是0表示跌停条件是ud <= -0.1
+                回顾：
+                    &lt; 在html和xml中表示<  less than
+                    &gt; 在html和xml中表示>  greater than
+    -->
+    <select id="getStockUpdownCount" resultType="java.util.Map">
+        select count(*) as count, udt.time
+        from (select (cur_price - pre_close_price) / pre_close_price as ud,
+                     date_format(cur_time, '%Y%m%d%H%i') as time
+              from stock_rt_info
+              where cur_time between #{openDate} and #{curDate}
+              having
+                <if test="flag==1">ud >= 0.1</if>
+                <if test="flag==0">ud &lt;= -0.1</if>
+            ) as udt
+        group by udt.time
+    </select>
+    <!--
+        个股涨跌幅度区间统计功能实现
+        List<Map> getStockUpDown(Date curDate);
+        xml中具有CDATA区可以将该区域中的数据原样输出
+            <![CDATA[ 内容 ]]>
+    -->
+    <select id="getStockUpDown" resultType="java.util.Map">
+        <![CDATA[
+            select count(*) as count,temp2.title
+            from
+                (select
+                     case
+                         when  temp.rate<-0.07  then '<-7%'
+                         when  temp.rate>=-0.07 and temp.rate < -0.05  then '-7~-5%'
+                         when  temp.rate>=-0.05 and temp.rate < -0.03  then '-5~-3%'
+                         when  temp.rate>=-0.03 and temp.rate < 0  then '-3~0%'
+                         when  temp.rate>=0 and temp.rate < 0.03  then '0~3%'
+                         when  temp.rate>=0.03 and temp.rate < 0.05  then '3~5%'
+                         when  temp.rate>=0.05 and temp.rate <= 0.07  then '5~7%'
+                         else '>7%'
+                         end as title
+                 from
+                     (select (cur_price - pre_close_price) / pre_close_price as rate
+                      from stock_rt_info
+                      where cur_time = #{curDate}) as temp) as temp2
+            group by temp2.title
+        ]]>
+    </select>
+    <!--
+        个股分时K线行情功能实现
+            List<Stock4MinuteDomain> stockScreenTimeSharing(@Param("code") String code,
+                                                    @Param("openDate") Date openDate,
+                                                    @Param("curDate") Date curDate);
+    -->
+    <select id="stockScreenTimeSharing" resultType="com.itheima.sh.stock.pojo.domain.Stock4MinuteDomain">
+        select
+            cur_time as date,
+            trade_amount as tradeAmt,
+            stock_code as code,
+            min_price as lowPrice,
+            pre_close_price as preClosePrice,
+            stock_name as name,
+            max_price as highPrice,
+            open_price as openPrice,
+            trade_volume as tradeVol,
+            cur_price as tradePrice
+        from stock_rt_info
+        where stock_code=#{code} and cur_time between #{openDate} and #{curDate}
+    </select>
+    <!--
+              个股日K线详情功能实现
+            List<Stock4EvrDayDomain> getDayKLinData(@Param("code") String code,
+                                                    @Param("startDate") Date startDate,
+                                                    @Param("curDate") Date curDate);
+    -->
+    <select id="getDayKLinData" resultType="com.itheima.sh.stock.pojo.domain.Stock4EvrDayDomain">
+        select
+            cur_time as date,
+            trade_amount as tradeAmt,
+            stock_code as code,
+            min_price as lowPrice,
+            pre_close_price as preClosePrice,
+            stock_name as name,
+            max_price as highPrice,
+            open_price as openPrice,
+            trade_volume as tradeVol,
+            cur_price as closePrice
+        from stock_rt_info
+        where
+            stock_code=#{code} and
+                cur_time in(select max(cur_time)
+                            from stock_rt_info
+                            where stock_code=#{code}  and
+                                cur_time between #{startDate}
+                                    and #{curDate}
+                            group by date_format(cur_time,'%Y%m%d'))
+    </select>
+
+    <!--
+          批量向stock_rt_info表中插入股票实时数据
+          void insertBach(@Param("list") List<StockRtInfo> list);
+    -->
+    <insert id="insertBach">
+        insert into stock_rt_info values
+        <foreach collection="list" item="sri" separator=",">
+            (
+            #{sri.id},#{sri.stockCode},#{sri.stockName},#{sri.preClosePrice},
+            #{sri.openPrice}, #{sri.curPrice}, #{sri.minPrice}, #{sri.maxPrice},
+            #{sri.tradeAmount}, #{sri.tradeVolume},#{sri.curTime}
+            )
+        </foreach>
+    </insert>
+</mapper>

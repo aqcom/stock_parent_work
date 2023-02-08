@@ -1,15 +1,14 @@
 # web定义
 server:
-  port: 8091 #端口号，不要动，前端书写的请求后端的端口号就是8091
+  port: 8092 #端口号，端口号不要和stock_backend冲突
 spring:
   profiles:
-    active: cache,stock,mq # 表示在核心配置文件中激活application-cache.yml配置文件，cache表示-后面的标识
+    active: stock,mq
   # 配置mysql数据源
   datasource:
     druid:
       username: root
-      password: Wwb20020302. # 你的数据库密码
-      # 192.168.200.131 是你的ip地址
+      password: Wwb20020302.
       url: jdbc:mysql://192.168.74.40:3306/stock_db?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
       driver-class-name: com.mysql.cj.jdbc.Driver # 如果是mysql8需要更改数据库驱动名 com.mysql.cj.jdbc.Driver
       # 初始化时建立物理连接的个数。初始化发生在显示调用 init 方法，或者第一次 getConnection 时
@@ -22,16 +21,14 @@ spring:
       # 并发效率会有所下降，如果需要可以通过配置 useUnfairLock 属性为 true 使用非公平锁。
       maxWait: 60000
 
-
 # 配置mybatis
 mybatis:
   # 实体类包扫描，使用实体类的时候不用书写包名.类名，直接书写类名即可
-  # 改成你的实体类路径
   type-aliases-package: com.itheima.sh.stock.pojo
   # 映射文件位置，classpath可以理解为resources目录 *表示所有
   mapper-locations: classpath:mapper/*.xml
   configuration:
-    map-underscore-to-camel-case: true # 开启驼峰映射 xx_xx xxXxx user_name userName
+    map-underscore-to-camel-case: true # 开启驼峰映射
 # pagehelper配置
 pagehelper:
   helper-dialect: mysql #指定分页数据库类型（方言）

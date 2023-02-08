@@ -7,12 +7,12 @@
         <groupId>com.itheima.sh.test</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <description>
-        主业务工程
-    </description>
+    <!--打包方式-->
+    <packaging>jar</packaging>
+    <description>采集股票数据</description>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>stock_backend</artifactId>
+    <artifactId>stock_job</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,47 +20,35 @@
     </properties>
 
     <dependencies>
-        <!--引入公共依赖-->
+        <!--导入公共项目stock_common依赖-->
         <dependency>
             <groupId>com.itheima.sh.test</groupId>
             <artifactId>stock_common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <!-- 基本依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--springboot测试依赖-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
-        <!--redis场景依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!-- redis创建连接池，默认不会创建连接池 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
-
+        <!--amqp依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
-
         <!--消息序列化的依赖-->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.9.10</version>
         </dependency>
-
 
     </dependencies>
 
@@ -71,6 +59,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- 打包跳过test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

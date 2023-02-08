@@ -1,0 +1,7 @@
+spring:
+  rabbitmq:
+    host: 172.16.154.136 # rabbitMQ的ip地址 你的linux的ip地址
+    port: 5672 # 端口
+    username: itcast
+    password: 123321
+    virtual-host: /
